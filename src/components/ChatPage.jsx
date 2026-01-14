@@ -116,6 +116,8 @@ const ChatPage = () => {
       });
     }
   }, [messages]);
+  console.log(user);
+  
 
   return (
     <div className="">
@@ -139,14 +141,20 @@ const ChatPage = () => {
 
         {/* Leave Room Button */}
         <div className="m-2 flex justify-center">
-          <button onClick={ handleLogout } className="dark:bg-red-500 dark:hover:bg-red-700 p-2 rounded-lg">
+          <button
+            onClick={handleLogout}
+            className="dark:bg-red-500 dark:hover:bg-red-700 p-2 rounded-lg"
+          >
             Leave Room
           </button>
         </div>
       </header>
 
       {/* Message Area */}
-      <main ref={chatBoxRef} className="py-16 w-2/3 dark:bg-slate-700 mx-auto h-screen overflow-auto no-scrollbar">
+      <main
+        ref={chatBoxRef}
+        className="py-16 w-2/3 dark:bg-slate-700 mx-auto h-screen overflow-auto no-scrollbar"
+      >
         <div className="message_container ">
           {/* Messages */}
           {messages.map((message, index) => (
@@ -164,16 +172,18 @@ const ChatPage = () => {
                 <div className="flex gap-2">
                   {/* profile image */}
                   <img
-                    className="h-10 w-10"
-                    src=" https://avatar.iran.liara.run/public"
-                    alt=""
+                    className="h-10 w-10 rounded-full"
+                    src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${message.sender}`}
+                    alt={message.sender}
                   />
 
                   {/* message content */}
                   <div className="flex flex-col gap-1">
                     <p className="text-sm font-semibold">{message.sender}</p>
                     <p>{message.content}</p>
-                    <p className="text-xs text-gray-300">{ timeAgo(message.timeStamp) }</p>
+                    <p className="text-xs text-gray-300">
+                      {timeAgo(message.timeStamp)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -196,7 +206,7 @@ const ChatPage = () => {
               if (e.key === "Enter") {
                 sendMessage();
               }
-            }}  
+            }}
           />
 
           {/* Input message container */}
@@ -205,7 +215,10 @@ const ChatPage = () => {
               <MdAttachFile size={20} />
             </button>
 
-            <button onClick={ sendMessage } className="dark:bg-green-500 p-3 rounded-full flex items-center justify-center dark:hover:bg-green-700">
+            <button
+              onClick={sendMessage}
+              className="dark:bg-green-500 p-3 rounded-full flex items-center justify-center dark:hover:bg-green-700"
+            >
               <MdSend size={20} />
             </button>
           </div>
